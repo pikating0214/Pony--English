@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 1 - Units 1-4 Review Challenge 1</title>
+  <style>
+    :root {
+      --ink: #233142;
+      --muted: #667085;
+      --line: #d9e2ec;
+      --paper: #fffdf7;
+      --brand: #2364aa;
+      --brand-dark: #173f70;
+      --accent: #f59f00;
+      --soft: #eef7ff;
+      --right: #237a3b;
+      --wrong: #b42318;
+      --shadow: 0 12px 28px rgba(35, 49, 66, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #edf6ff 0%, #fff8e8 100%);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--brand);
+      color: white;
+      padding: 22px 16px 16px;
+    }
+
+    .wrap {
+      width: min(980px, 100%);
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 10px; }
+
+    .subtitle {
+      max-width: 800px;
+      margin: 0;
+      color: #eaf6ff;
+      font-size: 15px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .nav-link.current {
+      background: white;
+      color: var(--brand-dark);
+    }
+
+    main { padding: 16px 16px 42px; }
+
+    .panel {
+      background: rgba(255,255,255,0.96);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .meta-box {
+      min-height: 84px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      background: var(--paper);
+    }
+
+    .meta-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--brand-dark);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      background: var(--soft);
+      border: 1px solid #bfdbfe;
+      color: #17446f;
+      padding: 4px 9px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .score-card {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 7px 18px rgba(35, 49, 66, 0.12);
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    .score {
+      font-size: 20px;
+      color: var(--brand-dark);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .progress {
+      flex: 1;
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #edf2f7;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      transition: width 0.2s ease;
+    }
+
+    .rank {
+      min-width: 138px;
+      text-align: right;
+      font-weight: 700;
+      color: #344054;
+    }
+
+    .question {
+      border-top: 1px solid var(--line);
+      padding: 13px 0;
+    }
+
+    .question:first-of-type { border-top: 0; }
+
+    .q-head {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .q-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .options {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .option {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 9px 10px;
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      margin-top: 5px;
+      accent-color: var(--brand);
+    }
+
+    .text-answer {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+      background: white;
+      margin-top: 8px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: -2px;
+    }
+
+    .feedback {
+      min-height: 22px;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .feedback.right { color: var(--right); }
+    .feedback.wrong { color: var(--wrong); }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button,
+    .page-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      background: var(--brand);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .secondary { background: #475467; }
+
+    button:hover,
+    .page-btn:hover {
+      background: var(--brand-dark);
+    }
+
+    .result {
+      display: none;
+      border: 2px solid var(--brand);
+    }
+
+    .result.show { display: block; }
+
+    .privacy {
+      border: 1px dashed #98a2b3;
+      background: #f8fafc;
+      color: #344054;
+      font-size: 14px;
+    }
+
+    @media (max-width: 720px) {
+      h1 { font-size: 23px; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .score-card {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .score { white-space: normal; }
+      .rank {
+        min-width: 0;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Day 1: Units 1-4 Review Challenge 1</h1>
+      <p class="subtitle">综合复习：比较级、最高级、一般过去时、旅行问答、Then and now</p>
+      <nav aria-label="六天闯关导航"><a class="nav-link current" href="index.html">Day 1</a><a class="nav-link" href="day2.html">Day 2</a><a class="nav-link" href="day3.html">Day 3</a><a class="nav-link" href="day4.html">Day 4</a><a class="nav-link" href="day5.html">Day 5</a><a class="nav-link" href="day6.html">Day 6</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h2>今日任务</h2>
+      <div class="meta-grid">
+        <div class="meta-box"><strong>题量</strong>共 18 题，只保留选择题和填空题。</div>
+        <div class="meta-box"><strong>适合</strong>基础弱学生，每天综合复习同一批核心知识点。</div>
+        <div class="meta-box"><strong>目标</strong>反复巩固词形、句型和语法，只做选择和填空。</div>
+      </div>
+      <div class="chips"><span class="chip">Unit 1 比较级/最高级</span><span class="chip">Unit 2 一般过去时</span><span class="chip">Unit 3 旅行问答</span><span class="chip">Unit 4 过去和现在</span><span class="chip">基础词形和语法</span></div>
+    </section>
+
+    <section class="score-card" aria-live="polite">
+      <div class="score">⭐ <span id="score">0</span> / 18</div>
+      <div class="progress" aria-label="score progress"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="rank" id="rank">Start!</div>
+    </section>
+
+    <section class="panel">
+      <h2>开始闯关</h2>
+      
+      <article class="question" data-answer="bigger">
+        <div class="q-head"><span class="q-num">1</span><strong>选择题：Your hands are ______ than mine.</strong></div>
+        <p class="hint">知识点：比较级：big -&gt; bigger</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="bigger"><span>A. bigger</span></label><label class="option"><input type="radio" name="q1" value="big"><span>B. big</span></label><label class="option"><input type="radio" name="q1" value="biggest"><span>C. biggest</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+      <article class="question" data-answer="the tallest">
+        <div class="q-head"><span class="q-num">2</span><strong>选择题：That is ______ dinosaur in this hall.</strong></div>
+        <p class="hint">知识点：最高级前常用 the</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="taller"><span>A. taller</span></label><label class="option"><input type="radio" name="q2" value="the tallest"><span>B. the tallest</span></label><label class="option"><input type="radio" name="q2" value="tall"><span>C. tall</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+    <article class="question" data-answer="metres">
+      <div class="q-head"><span class="q-num">3</span><strong>填空题：I am 1.65 ______.</strong></div>
+      <p class="hint">知识点：身高单位</p>
+      <input class="text-answer" type="text" aria-label="第3题输入框" placeholder="输入一个单词或短语">
+      <div class="feedback"></div>
+    </article>
+      <article class="question" data-answer="kilograms">
+        <div class="q-head"><span class="q-num">4</span><strong>选择题：—How heavy are you? —I'm 48 ______.</strong></div>
+        <p class="hint">知识点：体重单位</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="metres"><span>A. metres</span></label><label class="option"><input type="radio" name="q4" value="kilograms"><span>B. kilograms</span></label><label class="option"><input type="radio" name="q4" value="years old"><span>C. years old</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+    <article class="question" data-answer="size">
+      <div class="q-head"><span class="q-num">5</span><strong>填空题：What ______ are your shoes?</strong></div>
+      <p class="hint">知识点：询问尺码</p>
+      <input class="text-answer" type="text" aria-label="第5题输入框" placeholder="输入一个单词或短语">
+      <div class="feedback"></div>
+    </article>
+      <article class="question" data-answer="cleaned">
+        <div class="q-head"><span class="q-num">6</span><strong>选择题：clean 的过去式应放在句子：I ______ my room yesterday.</strong></div>
+        <p class="hint">知识点：一般过去时</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q6" value="clean"><span>A. clean</span></label><label class="option"><input type="radio" name="q6" value="cleaned"><span>B. cleaned</span></label><label class="option"><input type="radio" name="q6" value="cleans"><span>C. cleans</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+    <article class="question" data-answer="watched">
+      <div class="q-head"><span class="q-num">7</span><strong>填空题：We ______ TV last night.</strong></div>
+      <p class="hint">知识点：watch 的过去式</p>
+      <input class="text-answer" type="text" aria-label="第7题输入框" placeholder="输入一个单词或短语">
+      <div class="feedback"></div>
+    </article>
+      <article class="question" data-answer="see">
+        <div class="q-head"><span class="q-num">8</span><strong>选择题：Did you ______ a film last Saturday?</strong></div>
+        <p class="hint">知识点：Did 后面用动词原形</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q8" value="saw"><span>A. saw</span></label><label class="option"><input type="radio" name="q8" value="see"><span>B. see</span></label><label class="option"><input type="radio" name="q8" value="seeing"><span>C. seeing</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+    <article class="question" data-answer="wash">
+      <div class="q-head"><span class="q-num">9</span><strong>填空题：I didn't ______ my clothes yesterday.</strong></div>
+      <p class="hint">知识点：didn't 后面用动词原形</p>
+      <input class="text-answer" type="text" aria-label="第9题输入框" placeholder="输入一个单词或短语">
+      <div class="feedback"></div>
+    </article>
+      <article class="question" data-answer="went fishing">
+        <div class="q-head"><span class="q-num">10</span><strong>选择题：go fishing 的过去式短语是 ______.</strong></div>
+        <p class="hint">知识点：go -&gt; went</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q10" value="went fishing"><span>A. went fishing</span></label><label class="option"><input type="radio" name="q10" value="goed fishing"><span>B. goed fishing</span></label><label class="option"><input type="radio" name="q10" value="goes fishing"><span>C. goes fishing</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+    <article class="question" data-answer="fell">
+      <div class="q-head"><span class="q-num">11</span><strong>填空题：I ______ off my bike and hurt my foot.</strong></div>
+      <p class="hint">知识点：fall 的过去式</p>
+      <input class="text-answer" type="text" aria-label="第11题输入框" placeholder="输入一个单词或短语">
+      <div class="feedback"></div>
+    </article>
+      <article class="question" data-answer="went">
+        <div class="q-head"><span class="q-num">12</span><strong>选择题：—Where did you go? —I ______ to Turpan.</strong></div>
+        <p class="hint">知识点：回答用过去式</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q12" value="go"><span>A. go</span></label><label class="option"><input type="radio" name="q12" value="went"><span>B. went</span></label><label class="option"><input type="radio" name="q12" value="goes"><span>C. goes</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+    <article class="question" data-answer="go">
+      <div class="q-head"><span class="q-num">13</span><strong>填空题：How did you ______ there?</strong></div>
+      <p class="hint">知识点：询问交通方式</p>
+      <input class="text-answer" type="text" aria-label="第13题输入框" placeholder="输入一个单词或短语">
+      <div class="feedback"></div>
+    </article>
+      <article class="question" data-answer="was">
+        <div class="q-head"><span class="q-num">14</span><strong>选择题：There ______ no library in my old school.</strong></div>
+        <p class="hint">知识点：单数用 was</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q14" value="was"><span>A. was</span></label><label class="option"><input type="radio" name="q14" value="were"><span>B. were</span></label><label class="option"><input type="radio" name="q14" value="are"><span>C. are</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+    <article class="question" data-answer="were">
+      <div class="q-head"><span class="q-num">15</span><strong>填空题：There ______ no computers in my time.</strong></div>
+      <p class="hint">知识点：复数用 were</p>
+      <input class="text-answer" type="text" aria-label="第15题输入框" placeholder="输入一个单词或短语">
+      <div class="feedback"></div>
+    </article>
+      <article class="question" data-answer="was">
+        <div class="q-head"><span class="q-num">16</span><strong>选择题：Before, I ______ quiet. Now, I am active.</strong></div>
+        <p class="hint">知识点：Before 说过去</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q16" value="am"><span>A. am</span></label><label class="option"><input type="radio" name="q16" value="was"><span>B. was</span></label><label class="option"><input type="radio" name="q16" value="were"><span>C. were</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+    <article class="question" data-answer="ride">
+      <div class="q-head"><span class="q-num">17</span><strong>填空题：I couldn't ______ my bike well before.</strong></div>
+      <p class="hint">知识点：couldn't 后面用动词原形</p>
+      <input class="text-answer" type="text" aria-label="第17题输入框" placeholder="输入一个单词或短语">
+      <div class="feedback"></div>
+    </article>
+      <article class="question" data-answer="use">
+        <div class="q-head"><span class="q-num">18</span><strong>选择题：People couldn't ______ the Internet before.</strong></div>
+        <p class="hint">知识点：couldn't + 动词原形</p>
+        <div class="options">
+          <label class="option"><input type="radio" name="q18" value="use"><span>A. use</span></label><label class="option"><input type="radio" name="q18" value="used"><span>B. used</span></label><label class="option"><input type="radio" name="q18" value="using"><span>C. using</span></label>
+        </div>
+        <div class="feedback"></div>
+      </article>
+      <div class="actions">
+        <button type="button" id="checkBtn">检查结果</button>
+        <button type="button" class="secondary" id="resetBtn">重新开始</button>
+      </div>
+    </section>
+
+    <section class="panel result" id="resultBox">
+      <h2 id="resultTitle">闯关结果</h2>
+      <p id="resultText"></p>
+    </section>
+
+    <section class="panel privacy">
+      <h2>老师和家长提示</h2>
+      <p>页面只提示是否正确和需要回看的知识点。网页不收集姓名和成绩，建议学生完成后截图提交。</p>
+      <div class="actions">
+        
+        <a class="page-btn" href="day2.html">下一天</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const total = 18;
+    const scoreEl = document.getElementById("score");
+    const progressFill = document.getElementById("progressFill");
+    const rankEl = document.getElementById("rank");
+    const resultBox = document.getElementById("resultBox");
+    const resultTitle = document.getElementById("resultTitle");
+    const resultText = document.getElementById("resultText");
+
+    function clean(value) {
+      return String(value)
+        .trim()
+        .replace(/[’]/g, "'")
+        .replace(/[。？！?.!,]/g, "")
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+    }
+
+    function answerOf(question) {
+      const radio = question.querySelector("input[type='radio']:checked");
+      if (radio) return radio.value;
+      const text = question.querySelector(".text-answer");
+      return text ? text.value : "";
+    }
+
+    function checkAnswers() {
+      let score = 0;
+      document.querySelectorAll(".question[data-answer]").forEach((question) => {
+        const expected = question.dataset.answer;
+        const actual = answerOf(question);
+        const feedback = question.querySelector(".feedback");
+        const isText = Boolean(question.querySelector(".text-answer"));
+        const correct = isText ? clean(actual) === clean(expected) : actual === expected;
+
+        if (correct) {
+          score += 1;
+          feedback.textContent = "Correct! 得到1星。";
+          feedback.className = "feedback right";
+        } else {
+          feedback.textContent = "Try again. 请回看本题下面的知识点，再试一次。";
+          feedback.className = "feedback wrong";
+        }
+      });
+      updateScore(score);
+      showResult(score);
+    }
+
+    function updateScore(score) {
+      scoreEl.textContent = score;
+      progressFill.style.width = (score / total * 100) + "%";
+      if (score >= Math.ceil(total * 0.85)) {
+        rankEl.textContent = "基础很稳";
+      } else if (score >= Math.ceil(total * 0.65)) {
+        rankEl.textContent = "继续巩固";
+      } else {
+        rankEl.textContent = "再练一遍";
+      }
+    }
+
+    function showResult(score) {
+      resultBox.classList.add("show");
+      if (score >= Math.ceil(total * 0.85)) {
+        resultTitle.textContent = "太棒了，今天过关！";
+        resultText.textContent = "今天的综合知识点掌握得比较稳。下一步可以把错题句子读熟。";
+      } else if (score >= Math.ceil(total * 0.65)) {
+        resultTitle.textContent = "不错，还需要再巩固";
+        resultText.textContent = "建议把错题对应的知识点读3遍，再重新做一遍。";
+      } else {
+        resultTitle.textContent = "别急，基础正在变稳";
+        resultText.textContent = "先读知识点提示，再做题。每天重复练，正确率会慢慢上来。";
+      }
+      resultBox.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function resetPage() {
+      document.querySelectorAll("input[type='radio']").forEach((input) => input.checked = false);
+      document.querySelectorAll(".text-answer").forEach((input) => input.value = "");
+      document.querySelectorAll(".feedback").forEach((feedback) => {
+        feedback.textContent = "";
+        feedback.className = "feedback";
+      });
+      resultBox.classList.remove("show");
+      updateScore(0);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.getElementById("checkBtn").addEventListener("click", checkAnswers);
+    document.getElementById("resetBtn").addEventListener("click", resetPage);
+  </script>
+</body>
+</html>
