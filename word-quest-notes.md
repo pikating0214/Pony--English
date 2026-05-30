@@ -10,15 +10,16 @@
 ## Files
 
 ```text
-pony-- English/
+Pony--English/
 ├── index.html
-└── project-notes.md
+├── word-quest.html
+└── word-quest-notes.md
 ```
 
 ## Teaching Design
 
 - The game has 6 levels matching Unit 1 to Unit 6.
-- Every vocabulary point from the provided Appendix 2 images is included at least once.
+- Most vocabulary points from the provided Appendix 2 images are included. The teacher removed two unclear sentence-completion cards: `space` and `stuck`.
 - Some words are tested as natural phrases instead of isolated words, for example:
   - `turn left`
   - `turn right`
@@ -44,12 +45,13 @@ pony-- English/
 - For weaker students: let them focus on English-to-Chinese questions first.
 - For stronger students: ask them to read the example sentence aloud before choosing.
 - Students can replay a level with shuffled order for review.
+- Each level's questions and choices are generated once when the level starts, so the choices stay stable after a student answers.
 
 ## Feedback And Scoring
 
 - Correct answers add points and stars.
-- Wrong answers do not display the correct answer directly.
-- Students receive a short hint and can review the word again.
+- After a student chooses, the page displays the correct answer for memory reinforcement.
+- Wrong answers do not show extra hint text; they only show the correct answer.
 - The result screen shows score, stars, and encouraging feedback.
 
 ## Privacy
@@ -60,13 +62,13 @@ pony-- English/
 
 ## Local Testing
 
-1. Open `pony-- English/index.html` in a browser.
+1. Open `Pony--English/index.html` in a browser.
 2. Test Unit 1 and Unit 6 on a phone-size screen and a computer-size screen.
 3. Check that choices are clickable and the result screen appears after the last question.
 4. Use the shuffle button to confirm the level can restart in a new order.
 
 ## GitHub Upload Notes
 
-- Target GitHub folder/repository name: `pony-- English`
-- Recommended workflow: manually upload `index.html` and `project-notes.md` to the matching GitHub folder/repository.
+- Target GitHub folder/repository name: `Pony--English`
+- Recommended workflow: manually upload or push `index.html`, `word-quest.html`, and `word-quest-notes.md` to the matching GitHub folder/repository.
 - Do not push from Codex unless the teacher explicitly asks for Git/GitHub operation.

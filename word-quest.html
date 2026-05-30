@@ -698,7 +698,6 @@
           ["word book", "单词书", "Write it in your word book.", "包含 word。"],
           ["postcard", "明信片", "I send a postcard from Scotland.", "旅游时常寄。"],
           ["lesson", "课", "Our English lesson starts early.", "课堂学习。"],
-          ["space", "太空", "The film is about space.", "宇宙空间。"],
           ["travel", "旅行", "I like to travel by train.", "去不同地方。"],
           ["half", "一半", "Half price means 50% off.", "二分之一。"],
           ["price", "价格", "What is the price of the book?", "买东西时看。"],
@@ -790,19 +789,11 @@
           ["hear", "听见", "Can you hear everyone?", "用耳朵感知声音。"],
           ["ant", "蚂蚁", "The ant is small.", "小昆虫。"],
           ["worry", "担心；担忧", "Do not worry.", "动词形式。"],
-          ["stuck", "陷住；无法移动", "The mouse is stuck in the mud.", "不能动了。"],
           ["mud", "泥", "The shoes are in the mud.", "湿土。"],
           ["pull", "拉；拽", "Pull the sled, please.", "向自己方向用力。"],
           ["everyone", "每人", "Everyone can help.", "所有人。"]
         ]
       }
-    ];
-
-    const encouragement = [
-      "Good thinking! Look at the meaning clue and try again.",
-      "Nice try! Read the example sentence one more time.",
-      "Almost there! Check the key word in the sentence.",
-      "Keep going! The hint can help you choose."
     ];
 
     let levelIndex = 0;
@@ -931,7 +922,8 @@
     function startLevel(index, shouldShuffle) {
       levelIndex = index;
       const level = getLevel();
-      order = shouldShuffle ? shuffle(level.items) : [...level.items];
+      order = (shouldShuffle ? shuffle(level.items) : [...level.items])
+        .map((item, itemIndex) => buildQuestion(item, itemIndex));
       cardIndex = 0;
       score = 0;
       stars = 0;
@@ -967,8 +959,7 @@
 
     function renderCard() {
       const level = getLevel();
-      const item = order[cardIndex];
-      const question = buildQuestion(item, cardIndex);
+      const question = order[cardIndex];
       const state = answered.get(cardIndex);
 
       els.levelBadge.textContent = level.badge;
@@ -1009,8 +1000,8 @@
       }
 
       const message = correct
-        ? "Great! You found the meaning in English and Chinese."
-        : encouragement[Math.floor(Math.random() * encouragement.length)] + " Hint: " + question.hint;
+        ? "答对了！正确答案：" + question.answer
+        : "再记一次：正确答案：" + question.answer;
 
       answered.set(cardIndex, { choice, correct, message });
       renderCard();
