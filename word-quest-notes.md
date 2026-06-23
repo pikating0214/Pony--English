@@ -1,95 +1,65 @@
-# Pony English Project Notes
+# Pony 综合语法复习项目说明
 
-## Project
+## 项目
 
-- Project name: Pony English Word Quest
-- Folder: `pony-- English`
-- Teaching focus: Appendix 2 vocabulary review, Chinese-English meaning check, phrase recognition, and example sentence understanding
-- Format: static HTML/CSS/JavaScript only
+- 项目名称：Pony 综合语法复习
+- 本地仓库：`/Users/miaomiaopeng/Documents/Rise- Teaching/Pony--English`
+- GitHub 仓库：`https://github.com/pikating0214/Pony--English`
+- 学生链接：`https://pikating0214.github.io/Pony--English/`
+- 形式：纯 HTML、CSS 和 JavaScript 静态页面
 
-## Files
+## 文件结构
 
 ```text
 Pony--English/
 ├── index.html
-├── day2.html
-├── day3.html
-├── day4.html
-├── day5.html
-├── day6.html
-├── day7.html
-├── word-quest.html
-├── grammar-review.html
+├── README.md
+├── netlify.toml
 └── word-quest-notes.md
 ```
 
-## Teaching Design
+`index.html` 是唯一的学生练习页面。旧的七天复习页面、Word Quest 页面、重复语法页面和旧生成脚本均已删除。
 
-- The game has 6 levels matching Unit 1 to Unit 6.
-- Most vocabulary points from the provided Appendix 2 images are included. The teacher removed two unclear sentence-completion cards: `space` and `stuck`.
-- Some words are tested as natural phrases instead of isolated words, for example:
-  - `turn left`
-  - `turn right`
-  - `go straight`
-  - `slow down`
-  - `pay attention to`
-  - `traffic lights`
-  - `see a film`
-  - `take a trip`
-  - `get together`
-  - `take a deep breath`
-  - `count to ten`
-- Question types include:
-  - English to Chinese
-  - Chinese to English
-  - phrase meaning
-  - sentence completion
-  - sentence understanding
+## 学习内容
 
-## Classroom Use
+- 来源：老师提供的6张复习题截图
+- 总题量：82个单独作答空
+- 共8个部分：
+  - 疑问词
+  - `there be` 句型
+  - 祈使句、感叹句和句型辨析
+  - 动词形式与时态
+  - 生日短文
+  - `do` 与 `play` 的形式变化
+  - 北京旅行短文
+  - Martin 火车故事
 
-- Recommended first use: teacher projects the page and plays one unit together with the class.
-- For weaker students: let them focus on English-to-Chinese questions first.
-- For stronger students: ask them to read the example sentence aloud before choosing.
-- Students can replay a level with shuffled order for review.
-- Each level's questions and choices are generated once when the level starts, so the choices stay stable after a student answers.
+## 学生反馈
 
-## Comprehensive Grammar Review
+- 每次只呈现一个空，学生通过选择完成。
+- 第一次选错后显示整句中文意思和判断步骤，不直接公布正确答案。
+- 错误选项会被排除，学生可以继续尝试。
+- 全部82题完成后，根据学生实际错误生成知识点总结。
+- 页面提供重新开始功能。
 
-- File: `grammar-review.html`
-- Source: 6 teacher-provided review screenshots, split into 82 single-blank tasks.
-- The page has 8 sections covering question words, `there be`, commands and exclamations, verb forms and tenses, and three short passage exercises.
-- Students complete one multiple-choice blank at a time.
-- Wrong-answer feedback gives the Chinese meaning and a short reasoning path without immediately exposing the answer.
-- After all questions are complete, the page summarizes the knowledge points connected to the student's actual mistakes.
-- No audio, APIs, student names, uploaded scores, or persistent storage are used.
+## 隐私与技术
 
-## Feedback And Scoring
+- 不收集学生姓名。
+- 不保存或上传成绩。
+- 不使用音频、API、外部服务或构建工具。
+- 页面适配电脑、iPhone、iPad 和 Android 手机/平板。
 
-- Correct answers add points and stars.
-- After a student chooses, the page displays the correct answer for memory reinforcement.
-- Wrong answers do not show extra hint text; they only show the correct answer.
-- The result screen shows score, stars, and encouraging feedback.
+## 本地检查
 
-## Privacy
+1. 打开 `index.html`。
+2. 分别测试正确和错误选择。
+3. 测试上一题、下一题和关卡选择。
+4. 测试重新开始功能。
+5. 检查全部完成后的错题知识点总结。
+6. 使用手机宽度检查按钮和文字是否正常显示。
 
-- The page does not ask for student names.
-- The page does not save scores.
-- The page does not upload any data.
+## GitHub 上传说明
 
-## Local Testing
-
-1. Open `Pony--English/index.html` in a browser.
-2. Open `word-quest.html` and `grammar-review.html` from the homepage links.
-3. Test Unit 1 and Unit 6 on a phone-size screen and a computer-size screen.
-4. In the grammar review, test a correct choice, a wrong choice, level selection, previous/next navigation, and the final mistake summary.
-5. Check that choices are clickable and the result screen appears after the last question.
-6. Use the shuffle button to confirm the word quest can restart in a new order.
-
-## GitHub Upload Notes
-
-- Target GitHub folder/repository name: `Pony--English`
-- Exact local repository path: `/Users/miaomiaopeng/Documents/Rise- Teaching/Pony--English`
-- Remote repository: `https://github.com/pikating0214/Pony--English.git`
-- Upload structure for this update: `index.html`, `grammar-review.html`, and `word-quest-notes.md`.
-- Do not push from Codex unless the teacher explicitly asks for Git/GitHub operation.
+- 目标分支：`main`
+- GitHub Pages 从仓库根目录的 `index.html` 打开。
+- 推送后等待 GitHub Pages 部署完成，再刷新学生链接。
