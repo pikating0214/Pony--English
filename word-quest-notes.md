@@ -12,7 +12,14 @@
 ```text
 Pony--English/
 ├── index.html
+├── day2.html
+├── day3.html
+├── day4.html
+├── day5.html
+├── day6.html
+├── day7.html
 ├── word-quest.html
+├── grammar-review.html
 └── word-quest-notes.md
 ```
 
@@ -47,6 +54,16 @@ Pony--English/
 - Students can replay a level with shuffled order for review.
 - Each level's questions and choices are generated once when the level starts, so the choices stay stable after a student answers.
 
+## Comprehensive Grammar Review
+
+- File: `grammar-review.html`
+- Source: 6 teacher-provided review screenshots, split into 82 single-blank tasks.
+- The page has 8 sections covering question words, `there be`, commands and exclamations, verb forms and tenses, and three short passage exercises.
+- Students complete one multiple-choice blank at a time.
+- Wrong-answer feedback gives the Chinese meaning and a short reasoning path without immediately exposing the answer.
+- After all questions are complete, the page summarizes the knowledge points connected to the student's actual mistakes.
+- No audio, APIs, student names, uploaded scores, or persistent storage are used.
+
 ## Feedback And Scoring
 
 - Correct answers add points and stars.
@@ -63,12 +80,16 @@ Pony--English/
 ## Local Testing
 
 1. Open `Pony--English/index.html` in a browser.
-2. Test Unit 1 and Unit 6 on a phone-size screen and a computer-size screen.
-3. Check that choices are clickable and the result screen appears after the last question.
-4. Use the shuffle button to confirm the level can restart in a new order.
+2. Open `word-quest.html` and `grammar-review.html` from the homepage links.
+3. Test Unit 1 and Unit 6 on a phone-size screen and a computer-size screen.
+4. In the grammar review, test a correct choice, a wrong choice, level selection, previous/next navigation, and the final mistake summary.
+5. Check that choices are clickable and the result screen appears after the last question.
+6. Use the shuffle button to confirm the word quest can restart in a new order.
 
 ## GitHub Upload Notes
 
 - Target GitHub folder/repository name: `Pony--English`
-- Recommended workflow: manually upload or push `index.html`, `word-quest.html`, and `word-quest-notes.md` to the matching GitHub folder/repository.
+- Exact local repository path: `/Users/miaomiaopeng/Documents/Rise- Teaching/Pony--English`
+- Remote repository: `https://github.com/pikating0214/Pony--English.git`
+- Upload structure for this update: `index.html`, `grammar-review.html`, and `word-quest-notes.md`.
 - Do not push from Codex unless the teacher explicitly asks for Git/GitHub operation.
